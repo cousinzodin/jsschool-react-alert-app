@@ -59,7 +59,7 @@ class AlertList extends React.Component {
 
     return this.props.alerts.map((alert, index) => (
       <AlertWithTimer
-        onTimeUp = {() => this.props.onDelete(alert)}
+        onTimeUp={() => this.props.onDelete(alert)}
         key={index}
         message={alert}
       />
@@ -120,6 +120,11 @@ function App() {
   return (
     <div className="App">
       <AlertWrapper />
+      <p>
+        <a href="https://github.com/cousinzodin//jsschool-react-alert-app">
+          View on Github
+        </a>
+      </p>
     </div>
   );
 }
