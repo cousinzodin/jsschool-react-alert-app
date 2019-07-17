@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d6b0afd7cb61c01de30cc3a647ae9f59",
+    "revision": "dd4a4640e8b2136ea5f9b6017b7a0c39",
     "url": "/jsschool-react-alert-app/index.html"
   },
   {
-    "revision": "4036c49d4ed4aa70f25e",
+    "revision": "178323ddb53da06aab39",
     "url": "/jsschool-react-alert-app/static/css/main.2cce8147.chunk.css"
   },
   {
-    "revision": "2ca676763a994825257c",
-    "url": "/jsschool-react-alert-app/static/js/2.6d4116ab.chunk.js"
+    "revision": "2d0186e0f6cc9a60b9e8",
+    "url": "/jsschool-react-alert-app/static/js/2.ea107c39.chunk.js"
   },
   {
-    "revision": "4036c49d4ed4aa70f25e",
-    "url": "/jsschool-react-alert-app/static/js/main.d87f058e.chunk.js"
+    "revision": "178323ddb53da06aab39",
+    "url": "/jsschool-react-alert-app/static/js/main.2661fd7a.chunk.js"
   },
   {
     "revision": "6f57f20c46ea6c9dde4b",
