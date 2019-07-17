@@ -13,26 +13,34 @@ const WithPortal = (element = document.body) => WrappedComponent => {
   };
 };
 
-// const WithTimer = WrappedComponent => {
-//   return class extends React.Component {
-//     constructor() {
-//       super();
-//       this.state = { renderChild: true };
-//     }
-//     componentDidMount() {
-//       setTimeout(() => this.setState({ renderChild: false }), 1000);
-//     }
-//     render() {
-//       return this.state.renderChild ? (
-//         <WrappedComponent {...this.props} />
-//       ) : null;
-//     }
-//   };
-// };
+const WithTimer = time => WrappedComponent => {
+  return class extends React.Component {
+    constructor() {
+      super();
+      this.timer = null;
+    }
+    componentDidMount() {
+      this.timer = setTimeout(() => this.onTimer(), time);
+    }
+
+    componentWillUnmount() {
+      clearTimeout(this.timer);
+    }
+
+    onTimer() {
+      if (this.props.onTimeUp) {
+        this.props.onTimeUp();
+      }
+    }
+    render() {
+      return <WrappedComponent {...this.props} />;
+    }
+  };
+};
 
 const Alert = props => <div className="alert">{props.message}</div>;
 
-class AlertWrapper extends React.Component {
+class AlertList extends React.Component {
   constructor(props) {
     super(props);
     this.container = document.createElement("div");
@@ -47,15 +55,19 @@ class AlertWrapper extends React.Component {
   }
   render() {
     const AlertWithPortal = WithPortal(this.container)(Alert);
-    //const TimedAlert = WithTimer(MyAlert);
+    const AlertWithTimer = WithTimer(2000)(AlertWithPortal);
 
     return this.props.alerts.map((alert, index) => (
-      <AlertWithPortal key={index} message={alert} />
+      <AlertWithTimer
+        onTimeUp = {() => this.props.onDelete(alert)}
+        key={index}
+        message={alert}
+      />
     ));
   }
 }
 
-class AlertController extends React.Component {
+class AlertWrapper extends React.Component {
   constructor() {
     super();
     this.input = React.createRef();
@@ -68,6 +80,12 @@ class AlertController extends React.Component {
     this.setState({ message: "", alerts: alerts });
     this.input.current.focus();
   }
+
+  removeAlert(value) {
+    const alerts = this.state.alerts.filter(i => i !== value);
+    this.setState({ alerts: alerts });
+  }
+
   componentDidMount() {
     this.input.current.focus();
   }
@@ -78,7 +96,10 @@ class AlertController extends React.Component {
     return (
       <div className="form">
         <h1>Alert App</h1>
-        <AlertWrapper alerts={this.state.alerts} />
+        <AlertList
+          alerts={this.state.alerts}
+          onDelete={e => this.removeAlert(e)}
+        />
         <form onSubmit={e => this.createAlert(e)}>
           <input
             value={this.state.message}
@@ -98,7 +119,7 @@ class AlertController extends React.Component {
 function App() {
   return (
     <div className="App">
-      <AlertController />
+      <AlertWrapper />
     </div>
   );
 }
