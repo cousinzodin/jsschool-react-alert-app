@@ -32,7 +32,7 @@ export default class AlertWrapper extends React.Component {
         <h1>Alert App</h1>
         <AlertList
           alerts={this.state.alerts}
-          onDelete={e => this.removeAlert(e)}
+          onDelete={alertMessage => this.removeAlert(alertMessage)}
         />
         <form onSubmit={e => this.createAlert(e)}>
           <input
