@@ -6,8 +6,7 @@ import Alert from "./Alert";
 export default class AlertList extends React.Component {
   constructor(props) {
     super(props);
-    this.container = document.createElement("div");
-    this.container.className = "alert-wrapper";
+    this.container = document.querySelector('.alert-wrapper')
   }
   componentDidMount() {
     document.body.insertBefore(this.container, document.body.firstChild);
